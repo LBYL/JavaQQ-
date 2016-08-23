@@ -19,7 +19,7 @@ import com.lbyl.Utils.LogUtil;
  * @author LBYL
  *
  */
-public class ServerUI {
+public class ServerCtrlUI {
 
 	private ChatServer chatServer;
 	private JLabel lb_port;
@@ -29,7 +29,7 @@ public class ServerUI {
 	private JLabel jl_toast;
 
 	public void initUI() {
-		new ServerUI();
+		new ServerCtrlUI();
 		chatServer = new ChatServer(9090);
 
 		initFrame();// ³õÊ¼»¯´°¿Ú

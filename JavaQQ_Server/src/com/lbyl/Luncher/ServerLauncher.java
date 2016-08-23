@@ -1,6 +1,6 @@
 package com.lbyl.Luncher;
 
-import com.lbyl.UI.ServerUI;
+import com.lbyl.UI.ServerCtrlUI;
 
 public class ServerLauncher {
 	/**
@@ -10,9 +10,7 @@ public class ServerLauncher {
 	 */
 	public static void main(String[] args) {
 
-		ServerUI SUI = new ServerUI();
+		ServerCtrlUI SUI = new ServerCtrlUI();
 		SUI.initUI();
-
 	}
-
 }

@@ -20,6 +20,7 @@ public class ChatServer {
 	private int port;
 	private ServerSocket sc;
 	private MainThread mThread;
+	private Socket client;
 
 	// 构造时传入端口号
 	public ChatServer(int port) {
@@ -48,7 +49,6 @@ public class ChatServer {
 			}
 			sc = new ServerSocket(port);
 			runningState = true;
-			LogUtil.log(runningState + "");
 			System.out.println("------服务器创建成功！-------");
 
 			mThread = new MainThread();
@@ -93,15 +93,15 @@ public class ChatServer {
 			super.run();
 			while (!isInterrupted()) {
 				// 阻塞接收客户端
-				Socket client;
+
 				try {
 					client = sc.accept();
-					System.out.println("上线了一个客户端！");
+					System.out.println("服务器收到新的socket！");
 					// 创建线程
 					ProcessThread st = new ProcessThread(client);
 					// 维护到队列中
 					ChatUtil.getStList().add(st);
-					System.out.println("-------现在有" + ChatUtil.getStList().size() + "个客户端--------");
+					System.out.println("-------现在有" + ChatUtil.getStList().size() + "个ProcessThread--------");
 
 					st.start();
 				} catch (IOException e) {

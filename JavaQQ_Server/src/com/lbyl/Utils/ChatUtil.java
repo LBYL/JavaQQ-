@@ -1,6 +1,7 @@
 package com.lbyl.Utils;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import com.lbyl.Biz.ProcessThread;
@@ -18,33 +19,23 @@ public class ChatUtil {
 	}
 
 	// 线程队列维护
-	private static ArrayList<Thread> stList = new ArrayList();
-	private static ProcessThread stThread;
+	private static ArrayList<ProcessThread> stList = new ArrayList();
 
 	/**
 	 * @return the stList
 	 */
-	public static ArrayList<Thread> getStList() {
+	public static ArrayList<ProcessThread> getStList() {
 		return stList;
 	}
-
 	/**
-	 * @param stList
-	 *            the stList to set
-	 */
-	public static void setStList(ArrayList<Thread> stList) {
-		ChatUtil.stList = stList;
-	}
-
-	/**
-	 * 群发方法
-	 * 
+	 * 群发消息
+	 * @param xmlMsg
 	 * @throws IOException
 	 */
-	public static void sendMsg2All(String Content) throws IOException {
+	public static void castToAll(String xmlMsg) throws IOException {
 		for (int i = 0; i < stList.size(); i++) {
-			stThread = (ProcessThread) stList.get(i);
-			stThread.sendMsg_S2C(Content);
+			OutputStream ous = stList.get(i).getOus();
+				ous.write(xmlMsg.getBytes());
 		}
 	}
 
